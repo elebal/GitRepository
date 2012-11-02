@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CalculateFutureContract">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="currentPrice" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="dayInYear" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CalculateFutureContractResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CalculateFutureContractResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CalculateFutureContractList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="currentPriceList" type="tns:ArrayOfDecimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="dayInYear" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDecimal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="decimal" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CalculateFutureContractListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CalculateFutureContractListResult" type="tns:ArrayOfDecimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CalculateFutureContractSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculateFutureContract" />
+  </wsdl:message>
+  <wsdl:message name="CalculateFutureContractSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculateFutureContractResponse" />
+  </wsdl:message>
+  <wsdl:message name="CalculateFutureContractListSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculateFutureContractList" />
+  </wsdl:message>
+  <wsdl:message name="CalculateFutureContractListSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculateFutureContractListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PricingServiceSoap">
+    <wsdl:operation name="CalculateFutureContract">
+      <wsdl:input message="tns:CalculateFutureContractSoapIn" />
+      <wsdl:output message="tns:CalculateFutureContractSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CalculateFutureContractList">
+      <wsdl:input message="tns:CalculateFutureContractListSoapIn" />
+      <wsdl:output message="tns:CalculateFutureContractListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PricingServiceSoap" type="tns:PricingServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CalculateFutureContract">
+      <soap:operation soapAction="http://tempuri.org/CalculateFutureContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateFutureContractList">
+      <soap:operation soapAction="http://tempuri.org/CalculateFutureContractList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PricingServiceSoap12" type="tns:PricingServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CalculateFutureContract">
+      <soap12:operation soapAction="http://tempuri.org/CalculateFutureContract" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateFutureContractList">
+      <soap12:operation soapAction="http://tempuri.org/CalculateFutureContractList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PricingService">
+    <wsdl:port name="PricingServiceSoap" binding="tns:PricingServiceSoap">
+      <soap:address location="http://localhost:1229/PricingService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PricingServiceSoap12" binding="tns:PricingServiceSoap12">
+      <soap12:address location="http://localhost:1229/PricingService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
